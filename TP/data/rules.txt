@@ -1,0 +1,36 @@
+@prefix ns: <http://www.owl-ontologies.com/Ontology1426150645.owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+@include <OWL>.
+
+[rule1: (?per rdf:type ns:brutcontext) (?per ns:heure ?heure) lessThan(?heure, 3)(?h rdf:type ns:highlevelcontext)   ->  (?h ns:dayperiodname "matin")]
+[rule2: (?per rdf:type ns:brutcontext) (?per ns:heure ?heure) greaterThan(?heure, 1)(?h rdf:type ns:highlevelcontext)   ->  (?h ns:dayperiodname "soir")]
+
+[rule3: (?per rdf:type ns:brutcontext) (?per ns:jour ?jour) lessThan(?jour, 5)(?h rdf:type ns:highlevelcontext)   ->  (?h ns:weekperiodname "jour_ouverable")]
+[rule4: (?per rdf:type ns:brutcontext) (?per ns:jour ?jour) greaterThan(?jour, 5)(?h rdf:type ns:highlevelcontext)   ->  (?h ns:weekperiodname "weekend")]
+
+
+
+[rule5: (?per rdf:type ns:brutcontext) (?per ns:mois ?mois) equal(?mois,6)         (?h rdf:type ns:highlevelcontext)   ->  (?h ns:saisonName "ete")]
+[rule6: (?per rdf:type ns:brutcontext) (?per ns:mois ?mois) equal(?mois,2)         (?h rdf:type ns:highlevelcontext)   ->  (?h ns:saisonName "hiver")]
+[rule7: (?per rdf:type ns:brutcontext) (?per ns:mois ?mois) equal(?mois,11)         (?h rdf:type ns:highlevelcontext)   ->  (?h ns:saisonName "automne")]
+[rule8: (?per rdf:type ns:brutcontext) (?per ns:mois ?mois) equal(?mois,4)         (?h rdf:type ns:highlevelcontext)   ->  (?h ns:saisonName "printemps")]
+
+
+
+
+[rule9: (?per rdf:type ns:highlevelcontext) (?per ns:dayperiodname ?dayperiod) equal(?dayperiod,"matin")  (?per ns:weekperiodname ?wp) equal(?wp,"weekend")
+ (?per ns:saisonName ?sn) equal(?sn,"printemps")
+ (?h rdf:type ns:contextclass)   ->  (?h ns:contextName "context-xxxxxx")]
+ 
+ 
+
+[rule10: (?per rdf:type ns:contextclass) (?per ns:contextName ?contextName) equal(?contextName,"context_x")  (?h rdf:type ns:menu)   ->  (?h ns:menuname "menu2")]
+
+
+[rule11: (?per rdf:type ns:menu) (?per ns:menuname ?menuname) equal(?menuname,"menu2")  (?h rdf:type ns:profile_utilisateur)   ->  (?h ns:name_profile "firman" )  ]
+ 
+
+
